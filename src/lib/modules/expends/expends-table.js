@@ -53,7 +53,7 @@ let tableInit = function (params) {
                     shadeClose: true,
                     shade: 0.3,
                     area: ['100%', '100%'],
-                    content: '/src/page/expends/expendsDetails.html',//iframe的url
+                    content: 'http://39.104.168.114/expends-management/src/page/expends/expendsDetails.html',//iframe的url
                     success:function (layero, index) {
                         let detailExpendsName = row.expendsName;
                         let detailExpendsTypeName = row.expendsTypeName;
