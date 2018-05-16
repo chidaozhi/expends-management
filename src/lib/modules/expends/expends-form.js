@@ -26,9 +26,8 @@ $('.expends-type-name').select2({
 // });
 $('#expend-reset').click(function () {
     $('#expends-name').val('');
-    $('.list input[type=checkbox]:checked').val('');
-    $('#expends-user-name').val(null).trigger('change');
-    $('#expends-start-time').val('');
+    $('#expends-type-name').val(null).trigger('change');
+    $('#expends-user-name').val('');
 });
 
 // export default submitFormJson

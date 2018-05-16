@@ -53,7 +53,7 @@ let tableInit = function (params) {
                     shadeClose: true,
                     shade: 0.3,
                     area: ['100%', '100%'],
-                    content: '../expends/expendsDetails.html',//iframe的url
+                    content: '/src/page/expends/expendsDetails.html',//iframe的url
                     success:function (layero, index) {
                         let detailExpendsName = row.expendsName;
                         let detailExpendsTypeName = row.expendsTypeName;
@@ -128,93 +128,89 @@ let tableInit = function (params) {
     });
 };
 
-let btnInit = function () {
-    $('#expend-query').click(function () {
-        // startTime = new Date($('#expends-start-time').val()).getTime();
-        $('#table').bootstrapTable('refreshOptions',{pageNumber:1,pageSize:10});
-        // $('#table').bootstrapTable('refresh',params);
-    });
-    $('#expend-reset').click(function () {
-        $('#table').bootstrapTable('refreshOptions',{pageNumber:1,pageSize:10});
-    });
+$('#expend-query').click(function () {
+    tableInit();
+    $('#table').bootstrapTable('refreshOptions',{pageNumber:1,pageSize:10});
+});
+$('#expend-reset').click(function () {
+    $('#table').bootstrapTable('refreshOptions',{pageNumber:1,pageSize:10});
+});
 
-    $('#expend-add').click(function () {
+$('#expend-add').click(function () {
+    layer.open({
+        type: 2,//iframe层
+        title: '添加',
+        maxmin: true,
+        shadeClose: true,
+        shade: 0.3,
+        area: ['30%', '70%'],
+        content: './expendsAdd.html' //iframe的url
+    });
+});
+$('#expend-modify').click(function () {
+    let selections = $('#table').bootstrapTable('getSelections');
+    if(selections.length === 1){
         layer.open({
             type: 2,//iframe层
-            title: '添加',
+            title: '修改',
             maxmin: true,
             shadeClose: true,
             shade: 0.3,
             area: ['30%', '70%'],
-            content: './expendsAdd.html' //iframe的url
+            content: './expendsUpdate.html' //iframe的url
         });
-    });
-    $('#expend-modify').click(function () {
-        let selections = $('#table').bootstrapTable('getSelections');
-        if(selections.length === 1){
-            layer.open({
-                type: 2,//iframe层
-                title: '修改',
-                maxmin: true,
-                shadeClose: true,
-                shade: 0.3,
-                area: ['30%', '70%'],
-                content: './expendsUpdate.html' //iframe的url
-            });
-            return selections;
-        }else {
-            layer.msg('请选择一条数据进行修改',{icon: 0})
-        }
+        return selections;
+    }else {
+        layer.msg('请选择一条数据进行修改',{icon: 0})
+    }
 
-    });
-    $('#expend-delete').click(function () {
-        let selections = $('#table').bootstrapTable('getSelections');
-        if (selections.length === 0){
-            layer.msg('请选择一条数据进行修改',{icon: 0});
-        }else{
-            layer.alert('确认删除？',{
-                closeBtn: 1    // 是否显示关闭按钮
-                , anim: 1 //动画类型`
-                , btn: ['确认', '返回'] //按钮
-                , icon: 3    // icon
-                ,yes:function (index) {
-                    let ids = [];
-                    for(let i=0; i<selections.length; i++){
-                        ids.push(selections[i].id);
+});
+$('#expend-delete').click(function () {
+    let selections = $('#table').bootstrapTable('getSelections');
+    if (selections.length === 0){
+        layer.msg('请选择一条数据进行修改',{icon: 0});
+    }else{
+        layer.alert('确认删除？',{
+            closeBtn: 1    // 是否显示关闭按钮
+            , anim: 1 //动画类型`
+            , btn: ['确认', '返回'] //按钮
+            , icon: 3    // icon
+            ,yes:function (index) {
+                let ids = [];
+                for(let i=0; i<selections.length; i++){
+                    ids.push(selections[i].id);
+                }
+                let deleteParams = {
+                    "ids":ids
+                };
+                let jsonDeleteParams = JSON.stringify(deleteParams);
+                console.log(jsonDeleteParams);
+                $.ajax({
+                    url:"/mg-web/emExpends/log/batchDelete",
+                    type: 'post',
+                    // useDefaultXhrHeader:false,
+                    data: jsonDeleteParams,
+                    contentType: "application/json",  //缺失会出现URL编码，无法转成json对象
+                    success: function () {
+                        layer.msg("删除成功", {icon: 1});
+                        $('#table').bootstrapTable('refreshOptions',{pageNumber:1,pageSize:10});
+                        return true;
+                    },
+                    error: function (req) {
+                        layer.msg('删除失败', {icon: 0});
+                        return true;
                     }
-                    let deleteParams = {
-                        "ids":ids
-                    };
-                    let jsonDeleteParams = JSON.stringify(deleteParams);
-                    console.log(jsonDeleteParams);
-                    $.ajax({
-                        url:"/mg-web/emExpends/log/batchDelete",
-                        type: 'post',
-                        // useDefaultXhrHeader:false,
-                        data: jsonDeleteParams,
-                        contentType: "application/json",  //缺失会出现URL编码，无法转成json对象
-                        success: function () {
-                            layer.msg("删除成功", {icon: 1});
-                            $('#table').bootstrapTable('refreshOptions',{pageNumber:1,pageSize:10});
-                            return true;
-                        },
-                        error: function (req) {
-                            layer.msg('删除失败', {icon: 0});
-                            return true;
-                        }
-                    });
-                }
-                , btn2: function (index) {
-                    layer.close();
-                }
-            });
-        }
+                });
+            }
+            , btn2: function (index) {
+                layer.close();
+            }
+        });
+    }
 
-    });
-};
+});
 
 // 初始化表格&按钮操作
 tableInit();
-btnInit();
 
 

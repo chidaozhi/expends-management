@@ -23,8 +23,7 @@ let dateInitFormat = function (val) {
     }
 };
 
-// 初始化表格
-tableInit();
+
 
 let tableInit = function (params) {
     $('#table').bootstrapTable({
@@ -89,3 +88,7 @@ let tableInit = function (params) {
         }]
     });
 };
+
+
+// 初始化表格
+tableInit();
