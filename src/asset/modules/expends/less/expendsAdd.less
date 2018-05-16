@@ -1,0 +1,30 @@
+//调整label默认的inline-block免去error导致的空行
+#table-add-form label {
+    display: inline;
+}
+
+.input-box label.col-xs-12 {
+    padding-left: 0;
+}
+
+//小屏幕情况下，外层包裹input-box去掉重复添加的左缩进
+#table-add-form .form-control {
+    height: 28px;
+}
+
+//输入框高度调为28适应select2高度
+#table-add-form .btn {
+    padding: 4px 12px;
+}
+
+//按钮高度调为28适应select2高度
+#table-add-form #expends-description {
+    height: 200px;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .main {
+        margin: 15px 15px;
+    }
+}

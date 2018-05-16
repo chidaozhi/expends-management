@@ -1,0 +1,21 @@
+#table-add-form label {
+  display: inline;
+}
+.input-box label.col-xs-12 {
+  padding-left: 0;
+}
+#table-update-form .form-control {
+  height: 28px;
+}
+#table-update-form .btn {
+  padding: 4px 12px;
+}
+#table-update-form #expends-description {
+  height: 200px;
+  width: 100%;
+}
+@media (max-width: 768px) {
+  .main {
+    margin: 15px 15px;
+  }
+}

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+<div class="main">
+	<ol class="breadcrumb">
+		<li><a href="#">查询首页</a></li>
+		<li class="active">修改页</li>
+	</ol>
+	<div class="update-form">
+		<form id="table-update-form" class="form-horizontal">
+			<div class="form-group" style="margin-top:15px">
+				<label class="control-label col-sm-1 col-xs-12" for="expends-name">开销名称：</label>
+				<div class="col-sm-2 col-xs-8">
+					<input type="text" placeholder="开销名称 模糊查询" class="form-control" id="expends-name"
+					       name="expendsName">
+				</div>
+				
+				<label class="control-label col-sm-1 col-xs-12" for="expends-user-name">开销人：</label>
+				<div class="col-sm-2 col-xs-8">
+					<input type="text" placeholder="开销人" class="form-control" id="expends-user-name"
+					       name="expendsUserName">
+				</div>
+				
+				<div class="col-sm-3 col-xs-12 input-box">
+					<label class="control-label col-sm-4 col-xs-12" for="expends-type-name">开销类型：</label>
+					<select class="expends-type-name col-sm-8 col-xs-12 form-control" name="expendsTypeName"
+					        id="expends-type-name" aria-hidden="true">
+						<option></option>
+						<option value="生活" id="life">生活</option>
+						<option value="学习" id="study">学习</option>
+						<option value="其他" id="other">其他</option>
+					</select>
+				</div>
+				
+				<label class="control-label col-sm-1 col-xs-12" for="expends-total">开销总计：</label>
+				<div class="col-sm-2 col-xs-8">
+					<input type="text" placeholder="开销总计" class="form-control" id="expends-total" name="expendsTotal">
+				</div>
+			</div>
+			<div class="form-group" style="margin-top:15px">
+				<label class="control-label col-sm-1 col-xs-12" for="expends-description">开销说明：</label>
+				<div class="col-sm-6 col-xs-8">
+					<textarea placeholder="开销说明" name="expendsDescription" id="expends-description"
+					          class="form-control"></textarea>
+				</div>
+			</div>
+		</form>
+	</div>
+	
+	<div class="update-btn">
+		<button id="updateSubmit" class="btn btn-primary">修改</button>
+		<button id="cancelUpdate" class="btn btn-default">返回</button>
+	</div>
+</div>
+
+</body>
+</html>

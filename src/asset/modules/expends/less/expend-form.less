@@ -1,0 +1,37 @@
+.query-form{
+    display: block;
+}
+.expends-box{
+    width: 450px;
+    height: 100px;
+    float: left;
+}
+.skin-section .list {
+    overflow: hidden;
+    float: none;
+    display: inline-block !important;
+    margin-bottom: 0;
+    line-height: 14px;
+    box-sizing: border-box;
+}
+
+.list li{
+    float: left;
+}
+
+//bootstrap样式调整
+
+#table-query-form .form-control{
+    height: 28px;
+}//输入框高度调为28适应select2高度
+#table-query-form .btn{
+    padding: 4px 12px;
+}//按钮高度调为28适应select2高度
+.input-box label.col-xs-12{
+    padding-left: 0;
+}//小屏幕情况下，外层包裹input-box去掉重复添加的左缩进
+@media (max-width: 768px){
+    #table-query-form button#expend-query.btn.btn-primary{
+        margin:15px 0 0 0 !important;
+    }
+}//小屏幕情况下，查询按钮的位置
