@@ -6,6 +6,7 @@ import layer from '../../../imports/plugin/layer/3.1.1/layer-vendor.js'
 import select2 from '../../../imports/plugin/select2/4.0.5/select2-vendor.js'
 import '../../common/validationSet.js'
 import '../../../asset/common/css/reset.css'
+import '../../../asset/modules/expends/less/expend-table.css'
 
 // 初始化时间格式
 let dateInitFormat = function (val) {

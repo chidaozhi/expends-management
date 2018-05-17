@@ -2,6 +2,7 @@ import $ from '../../../imports/main/jquery/1.11.3/jquery-vendor.js'
 import layer from '../../../imports/plugin/layer/3.1.1/layer-vendor.js'
 import bootstrap from '../../../imports/main/bootstrap/3.3.7/bootstrap-vendor.js'
 import bootstrapTable from '../../../imports/plugin/bootstrap-table-vendor/1.12.1/bootstrap-table-vendor.js'
+import '../../../asset/modules/expends/less/expend-table.css'
 
 const onlineUrl = 'http://39.104.168.114/expends-management/src/page';
 const devUrl = '..';
@@ -39,6 +40,7 @@ let tableInit = function (params) {
         queryParamsType:"limit",
         queryParams:initParams,
         method:"post",
+        height:450,
         pagination:true,
         striped:true,
         toolbar:".btns",
