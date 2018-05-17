@@ -3,6 +3,9 @@ import layer from '../../../imports/plugin/layer/3.1.1/layer-vendor.js'
 import bootstrap from '../../../imports/main/bootstrap/3.3.7/bootstrap-vendor.js'
 import bootstrapTable from '../../../imports/plugin/bootstrap-table-vendor/1.12.1/bootstrap-table-vendor.js'
 
+const onlineUrl = 'http://39.104.168.114/expends-management/src/page';
+const devUrl = '..';
+
 // 初始化时间格式
 let dateInitFormat = function (val) {
     let dateVal = val + "";
@@ -19,22 +22,22 @@ let dateInitFormat = function (val) {
     }
 };
 
+let initParams = function (params) {
+    return {
+        limit: params.limit,
+        offset: params.offset
+    }
+};
+
+let expendsName = '';
+let expendsTypeName = '';
+let expendsUserName = '';
 
 let tableInit = function (params) {
     $('#table').bootstrapTable({
         url:"/mg-web/emExpends/log/list",
         queryParamsType:"limit",
-        queryParams:function(params){
-            let paramsObject = {
-                limit: params.limit,
-                offset: params.offset,
-                expendsName:$('#expends-name').val(),
-                expendsTypeName:$('.expends-type-name').val(),
-                expendsUserName:$('#expends-user-name').val()
-                // createTime:startTime
-            };
-            return paramsObject;
-        },
+        queryParams:initParams,
         method:"post",
         pagination:true,
         striped:true,
@@ -50,10 +53,10 @@ let tableInit = function (params) {
                     type: 2,//iframe层
                     title: '明细',
                     maxmin: true,
-                    shadeClose: true,
                     shade: 0.3,
-                    area: ['100%', '100%'],
-                    content: 'http://39.104.168.114/expends-management/src/page/expends/expendsDetails.html',//iframe的url
+                    area: ['70%', '50%'],
+                    resize:true,
+                    content: onlineUrl + '/expends/expendsDetails.html',//iframe的url
                     success:function (layero, index) {
                         let detailExpendsName = row.expendsName;
                         let detailExpendsTypeName = row.expendsTypeName;
@@ -129,11 +132,25 @@ let tableInit = function (params) {
 };
 
 $('#expend-query').click(function () {
-    tableInit();
-    $('#table').bootstrapTable('refreshOptions',{pageNumber:1,pageSize:10});
+    // $("#table").bootstrapTable('destroy');
+    expendsName = $('#expends-name').val();
+    expendsTypeName = $('.expends-type-name').val();
+    expendsUserName = $('#expends-user-name').val();
+
+    let queryParams = function (params) {
+        return {
+            limit: params.limit,
+            offset: params.offset,
+            expendsName:expendsName,
+            expendsTypeName:expendsTypeName,
+            expendsUserName:expendsUserName
+        }
+    };
+    $('#table').bootstrapTable('refreshOptions',{queryParams:queryParams,pageNumber:1,pageSize:10});
+    // $('#table').bootstrapTable('refreshOptions',{pageNumber:1,pageSize:10});
 });
 $('#expend-reset').click(function () {
-    $('#table').bootstrapTable('refreshOptions',{pageNumber:1,pageSize:10});
+    $('#table').bootstrapTable('refreshOptions',{queryParams:initParams,pageNumber:1,pageSize:10});
 });
 
 $('#expend-add').click(function () {
@@ -141,9 +158,9 @@ $('#expend-add').click(function () {
         type: 2,//iframe层
         title: '添加',
         maxmin: true,
-        shadeClose: true,
         shade: 0.3,
         area: ['30%', '70%'],
+        resize:true,
         content: './expendsAdd.html' //iframe的url
     });
 });
@@ -154,9 +171,9 @@ $('#expend-modify').click(function () {
             type: 2,//iframe层
             title: '修改',
             maxmin: true,
-            shadeClose: true,
             shade: 0.3,
             area: ['30%', '70%'],
+            resize:true,
             content: './expendsUpdate.html' //iframe的url
         });
         return selections;

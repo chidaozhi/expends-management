@@ -10,3 +10,7 @@ ul, li {
 label.error{
 	color: rgba(218,68,57,0.6);
 }
+
+textarea{
+	resize: none;
+}

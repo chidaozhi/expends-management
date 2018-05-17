@@ -7,16 +7,6 @@ import '../../common/validationSet.js'
 import '../../../asset/common/css/reset.css'
 import '../../../asset/modules/expends/less/expendsUpdate.less'
 
-//父页面传递选中值
-let selections = parent.$('#table').bootstrapTable('getSelections');
-//修改表单初始化函数
-let updateFormInit = function () {
-    $('#expends-name').val(selections[0].expendsName);
-    $('#expends-type-name').val(selections[0].expendsTypeName);
-    $('#expends-user-name').val(selections[0].expendsUserName);
-    $('#expends-total').val(selections[0].expendsTotal);
-    $('#expends-description').val(selections[0].expendsDescription);
-};
 
 //开销类型select2组件初始化
 $('.expends-type-name').select2({
@@ -25,6 +15,21 @@ $('.expends-type-name').select2({
     placeholder: "开销类型",
     allowClear: true
 });
+
+
+//父页面传递选中值
+let selections = parent.$('#table').bootstrapTable('getSelections');
+//修改表单初始化函数
+let updateFormInit = function () {
+    $('#expends-name').val(selections[0].expendsName);
+    $('#expends-type-name').val(selections[0].expendsTypeName);
+    $('#expends-type-name').trigger('change');
+    $('#expends-user-name').val(selections[0].expendsUserName);
+    $('#expends-total').val(selections[0].expendsTotal);
+    $('#expends-description').val(selections[0].expendsDescription);
+};
+
+
 
 //表单数据初始化
 updateFormInit();
